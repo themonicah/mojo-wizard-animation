@@ -67,7 +67,7 @@
 
     .wizard {
       width: 364px;
-      margin-top: 80px;
+      margin-top: 140px;
       z-index: 10;
       position: relative;
     }
@@ -179,32 +179,45 @@
     }
     .star-1 {
       width: 18px; height: 18px;
-      top: 18%; left: 20%;
-      animation: twinkle1 3.2s ease-in-out infinite;
+      top: 15%; left: 18%;
+      animation: twinkle1 4.5s ease-in-out infinite;
     }
     .star-2 {
       width: 12px; height: 12px;
-      top: 32%; left: 70%;
-      animation: twinkle2 4.1s ease-in-out infinite;
+      top: 10%; left: 55%;
+      animation: twinkle2 5.8s ease-in-out infinite 1.5s;
     }
     .star-3 {
       width: 15px; height: 15px;
-      top: 52%; left: 78%;
-      animation: twinkle3 3.7s ease-in-out infinite;
+      top: 55%; left: 82%;
+      animation: twinkle3 5s ease-in-out infinite 3s;
     }
     @keyframes twinkle1 {
-      0%, 100% { opacity: 0; transform: scale(0.5); }
-      50%      { opacity: 1; transform: scale(1); }
+      0%       { opacity: 0; transform: scale(0.3) translate(0, 0); }
+      15%      { opacity: 1; transform: scale(1); }
+      30%      { opacity: 0; transform: scale(0.4); }
+      50%      { opacity: 0; transform: scale(0.3) translate(120px, 280px); }
+      65%      { opacity: 0.9; transform: scale(0.8) translate(120px, 280px); }
+      80%      { opacity: 0; transform: scale(0.3) translate(120px, 280px); }
+      100%     { opacity: 0; transform: scale(0.3) translate(0, 0); }
     }
     @keyframes twinkle2 {
-      0%, 100% { opacity: 0.1; transform: scale(0.6); }
-      40%      { opacity: 1; transform: scale(1.1); }
-      80%      { opacity: 0; transform: scale(0.4); }
+      0%       { opacity: 0; transform: scale(0.3) translate(0, 0); }
+      12%      { opacity: 1; transform: scale(1.1); }
+      25%      { opacity: 0; transform: scale(0.3); }
+      45%      { opacity: 0; transform: scale(0.3) translate(-200px, 180px); }
+      58%      { opacity: 0.8; transform: scale(0.7) translate(-200px, 180px); }
+      72%      { opacity: 0; transform: scale(0.3) translate(-200px, 180px); }
+      100%     { opacity: 0; transform: scale(0.3) translate(0, 0); }
     }
     @keyframes twinkle3 {
-      0%, 100% { opacity: 0; transform: scale(0.3); }
-      30%      { opacity: 0.8; transform: scale(1.2); }
-      60%      { opacity: 1; transform: scale(0.9); }
+      0%       { opacity: 0; transform: scale(0.3) translate(0, 0); }
+      18%      { opacity: 0.9; transform: scale(1.2); }
+      35%      { opacity: 0; transform: scale(0.4); }
+      55%      { opacity: 0; transform: scale(0.3) translate(-300px, -200px); }
+      68%      { opacity: 1; transform: scale(0.9) translate(-300px, -200px); }
+      82%      { opacity: 0; transform: scale(0.3) translate(-300px, -200px); }
+      100%     { opacity: 0; transform: scale(0.3) translate(0, 0); }
     }
 
     /* Gentle rocking with subtle 3D tilt */
