@@ -167,6 +167,46 @@
       50%      { top: 37%; left: 67%;  margin-top: -7px; }
     }
 
+    /* Twinkling stars */
+    .star {
+      position: absolute;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .star img {
+      width: 100%;
+      height: 100%;
+    }
+    .star-1 {
+      width: 18px; height: 18px;
+      top: 18%; left: 20%;
+      animation: twinkle1 3.2s ease-in-out infinite;
+    }
+    .star-2 {
+      width: 12px; height: 12px;
+      top: 32%; left: 70%;
+      animation: twinkle2 4.1s ease-in-out infinite;
+    }
+    .star-3 {
+      width: 15px; height: 15px;
+      top: 52%; left: 78%;
+      animation: twinkle3 3.7s ease-in-out infinite;
+    }
+    @keyframes twinkle1 {
+      0%, 100% { opacity: 0; transform: scale(0.5); }
+      50%      { opacity: 1; transform: scale(1); }
+    }
+    @keyframes twinkle2 {
+      0%, 100% { opacity: 0.1; transform: scale(0.6); }
+      40%      { opacity: 1; transform: scale(1.1); }
+      80%      { opacity: 0; transform: scale(0.4); }
+    }
+    @keyframes twinkle3 {
+      0%, 100% { opacity: 0; transform: scale(0.3); }
+      30%      { opacity: 0.8; transform: scale(1.2); }
+      60%      { opacity: 1; transform: scale(0.9); }
+    }
+
     /* Gentle rocking with subtle 3D tilt */
     @keyframes spin1 {
       0%, 100% { transform: rotate(0deg) rotateX(0deg) rotateY(0deg); }
@@ -219,6 +259,11 @@
       <div class="icon icon-4" data-tooltip="Timer"><img src="icon 4.svg" alt="Timer"></div>
       <div class="icon icon-5" data-tooltip="Group Maker"><img src="icon 5.svg" alt="Group Maker"></div>
       <div class="icon icon-6" data-tooltip="Music"><img src="Group.svg" alt="Music"></div>
+
+      <!-- Twinkling stars -->
+      <div class="star star-1"><img src="star 1.svg" alt=""></div>
+      <div class="star star-2"><img src="star 1.svg" alt=""></div>
+      <div class="star star-3"><img src="star 1.svg" alt=""></div>
     </div>
   </div>
   <script>
