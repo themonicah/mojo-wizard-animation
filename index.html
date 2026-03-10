@@ -76,7 +76,7 @@
 
     .wizard {
       width: 364px;
-      margin-top: 140px;
+      margin-top: 200px;
       z-index: 10;
       position: relative;
     }
@@ -202,31 +202,19 @@
       animation: twinkle3 5s ease-in-out infinite 3s;
     }
     @keyframes twinkle1 {
-      0%       { opacity: 0; transform: scale(0.3) translate(0, 0); }
+      0%, 100% { opacity: 0; transform: scale(0.3); }
       15%      { opacity: 1; transform: scale(1); }
       30%      { opacity: 0; transform: scale(0.4); }
-      50%      { opacity: 0; transform: scale(0.3) translate(120px, 280px); }
-      65%      { opacity: 0.9; transform: scale(0.8) translate(120px, 280px); }
-      80%      { opacity: 0; transform: scale(0.3) translate(120px, 280px); }
-      100%     { opacity: 0; transform: scale(0.3) translate(0, 0); }
     }
     @keyframes twinkle2 {
-      0%       { opacity: 0; transform: scale(0.3) translate(0, 0); }
+      0%, 100% { opacity: 0; transform: scale(0.3); }
       12%      { opacity: 1; transform: scale(1.1); }
       25%      { opacity: 0; transform: scale(0.3); }
-      45%      { opacity: 0; transform: scale(0.3) translate(-200px, 180px); }
-      58%      { opacity: 0.8; transform: scale(0.7) translate(-200px, 180px); }
-      72%      { opacity: 0; transform: scale(0.3) translate(-200px, 180px); }
-      100%     { opacity: 0; transform: scale(0.3) translate(0, 0); }
     }
     @keyframes twinkle3 {
-      0%       { opacity: 0; transform: scale(0.3) translate(0, 0); }
+      0%, 100% { opacity: 0; transform: scale(0.3); }
       18%      { opacity: 0.9; transform: scale(1.2); }
       35%      { opacity: 0; transform: scale(0.4); }
-      55%      { opacity: 0; transform: scale(0.3) translate(-300px, -200px); }
-      68%      { opacity: 1; transform: scale(0.9) translate(-300px, -200px); }
-      82%      { opacity: 0; transform: scale(0.3) translate(-300px, -200px); }
-      100%     { opacity: 0; transform: scale(0.3) translate(0, 0); }
     }
 
     /* Gentle rocking with subtle 3D tilt */
@@ -264,15 +252,15 @@
 </head>
 <body>
   <nav class="tabs">
-    <button class="tab disabled" disabled>hero</button>
-    <button class="tab disabled" disabled>friends card</button>
-    <button class="tab disabled" disabled>privacy</button>
-    <button class="tab disabled" disabled>SL hero</button>
-    <button class="tab disabled" disabled>QR friends</button>
-    <button class="tab disabled" disabled>bento card</button>
-    <button class="tab disabled" disabled>friends</button>
-    <button class="tab active">toolkit</button>
-    <button class="tab disabled" disabled>routing cards</button>
+    <button class="tab disabled" disabled>1. Hero</button>
+    <button class="tab disabled" disabled>2. Friends Card</button>
+    <button class="tab disabled" disabled>3. Privacy</button>
+    <button class="tab disabled" disabled>4. SL Hero</button>
+    <button class="tab disabled" disabled>5. QR Friends</button>
+    <button class="tab disabled" disabled>6. Bento Card</button>
+    <button class="tab disabled" disabled>7. Friends</button>
+    <button class="tab active">8. Toolkit</button>
+    <button class="tab disabled" disabled>9. Routing Cards</button>
   </nav>
 
   <div class="tile">
