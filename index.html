@@ -44,6 +44,15 @@
       color: #fff;
     }
 
+    .tab.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .tab.disabled:hover {
+      background: #f0f0f0;
+    }
+
     /* Animation tile */
     .tile {
       background: #f5f5f5;
@@ -255,10 +264,15 @@
 </head>
 <body>
   <nav class="tabs">
-    <button class="tab active">toolkit mojo</button>
-    <button class="tab">mojo waving</button>
-    <button class="tab">training</button>
-    <button class="tab">toolkit mojo bento box</button>
+    <button class="tab disabled" disabled>hero</button>
+    <button class="tab disabled" disabled>friends card</button>
+    <button class="tab disabled" disabled>privacy</button>
+    <button class="tab disabled" disabled>SL hero</button>
+    <button class="tab disabled" disabled>QR friends</button>
+    <button class="tab disabled" disabled>bento card</button>
+    <button class="tab disabled" disabled>friends</button>
+    <button class="tab active">toolkit</button>
+    <button class="tab disabled" disabled>routing cards</button>
   </nav>
 
   <div class="tile">
