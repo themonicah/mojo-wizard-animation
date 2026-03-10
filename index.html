@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mojo Wizard Animation</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    /* Tab bar */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      padding: 24px 0 16px;
+    }
+
+    .tab {
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      background: #f0f0f0;
+      color: #666;
+      transition: all 0.2s;
+    }
+
+    .tab:hover {
+      background: #e0e0e0;
+    }
+
+    .tab.active {
+      background: #7D40FF;
+      color: #fff;
+    }
+
+    /* Animation tile */
+    .tile {
+      background: #f5f5f5;
+      width: 100%;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .scene {
+      position: relative;
+      width: 650px;
+      height: 650px;
+      background: #ffffff;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .wizard {
+      width: 364px;
+      margin-top: 80px;
+      z-index: 10;
+      position: relative;
+    }
+
+    /* Icons in a tight rainbow arc */
+    .icon {
+      position: absolute;
+      width: 85px;
+      height: 85px;
+      z-index: 15;
+      cursor: pointer;
+      perspective: 400px;
+    }
+
+    .icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .icon.flung img {
+      pointer-events: none;
+    }
+
+    .icon::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.8);
+      background: #333;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .icon:hover::after {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    /* Icons along tight overlapping arc */
+    .icon-1 {
+      z-index: 5;
+      animation: float1 5.2s cubic-bezier(0.4, 0, 0.2, 1) infinite, spin1 25s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    .icon-2 {
+      z-index: 6;
+      animation: float2 4.6s cubic-bezier(0.33, 0, 0.2, 1) infinite, spin2 22s cubic-bezier(0.33, 0, 0.2, 1) infinite;
+    }
+    .icon-3 {
+      z-index: 7;
+      animation: float3 5.8s cubic-bezier(0.45, 0, 0.2, 1) infinite, spin3 28s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+    }
+    .icon-4 {
+      z-index: 8;
+      animation: float4 4.9s cubic-bezier(0.38, 0, 0.2, 1) infinite, spin4 20s cubic-bezier(0.38, 0, 0.2, 1) infinite;
+    }
+    .icon-5 {
+      z-index: 7;
+      animation: float5 5.5s cubic-bezier(0.42, 0, 0.2, 1) infinite, spin5 30s cubic-bezier(0.42, 0, 0.2, 1) infinite;
+    }
+    .icon-6 {
+      z-index: 6;
+      animation: float6 4.8s cubic-bezier(0.35, 0, 0.2, 1) infinite, spin6 24s cubic-bezier(0.35, 0, 0.2, 1) infinite;
+    }
+
+    /* Arc hugging close to wizard's head, stretched right */
+    @keyframes float1 {
+      0%, 100% { top: 48%; left: 14%;  margin-top: 0; }
+      50%      { top: 46%; left: 15%;  margin-top: -6px; }
+    }
+    @keyframes float2 {
+      0%, 100% { top: 35%; left: 23%;  margin-top: 0; }
+      50%      { top: 33%; left: 24%;  margin-top: -7px; }
+    }
+    @keyframes float3 {
+      0%, 100% { top: 27%; left: 34%;  margin-top: 0; }
+      50%      { top: 25%; left: 35%;  margin-top: -5px; }
+    }
+    @keyframes float4 {
+      0%, 100% { top: 25%; left: 46%;  margin-top: 0; }
+      50%      { top: 23%; left: 47%;  margin-top: -8px; }
+    }
+    @keyframes float5 {
+      0%, 100% { top: 30%; left: 57%;  margin-top: 0; }
+      50%      { top: 28%; left: 58%;  margin-top: -6px; }
+    }
+    @keyframes float6 {
+      0%, 100% { top: 39%; left: 66%;  margin-top: 0; }
+      50%      { top: 37%; left: 67%;  margin-top: -7px; }
+    }
+
+    /* Gentle rocking with subtle 3D tilt */
+    @keyframes spin1 {
+      0%, 100% { transform: rotate(0deg) rotateX(0deg) rotateY(0deg); }
+      25%      { transform: rotate(12deg) rotateX(8deg) rotateY(-6deg); }
+      75%      { transform: rotate(-10deg) rotateX(-5deg) rotateY(8deg); }
+    }
+    @keyframes spin2 {
+      0%, 100% { transform: rotate(0deg) rotateX(0deg) rotateY(0deg); }
+      30%      { transform: rotate(-14deg) rotateX(-7deg) rotateY(10deg); }
+      70%      { transform: rotate(8deg) rotateX(6deg) rotateY(-5deg); }
+    }
+    @keyframes spin3 {
+      0%, 100% { transform: rotate(0deg) rotateX(0deg) rotateY(0deg); }
+      20%      { transform: rotate(10deg) rotateX(9deg) rotateY(7deg); }
+      60%      { transform: rotate(-12deg) rotateX(-6deg) rotateY(-8deg); }
+    }
+    @keyframes spin4 {
+      0%, 100% { transform: rotate(0deg) rotateX(0deg) rotateY(0deg); }
+      35%      { transform: rotate(-8deg) rotateX(-8deg) rotateY(-6deg); }
+      65%      { transform: rotate(14deg) rotateX(5deg) rotateY(9deg); }
+    }
+    @keyframes spin5 {
+      0%, 100% { transform: rotate(0deg) rotateX(0deg) rotateY(0deg); }
+      40%      { transform: rotate(11deg) rotateX(7deg) rotateY(-8deg); }
+      80%      { transform: rotate(-9deg) rotateX(-9deg) rotateY(5deg); }
+    }
+    @keyframes spin6 {
+      0%, 100% { transform: rotate(0deg) rotateX(0deg) rotateY(0deg); }
+      25%      { transform: rotate(-13deg) rotateX(-6deg) rotateY(7deg); }
+      75%      { transform: rotate(10deg) rotateX(8deg) rotateY(-6deg); }
+    }
+  </style>
+</head>
+<body>
+  <nav class="tabs">
+    <button class="tab active">toolkit mojo</button>
+    <button class="tab">mojo waving</button>
+    <button class="tab">training</button>
+    <button class="tab">toolkit mojo bento box</button>
+  </nav>
+
+  <div class="tile">
+    <div class="scene">
+      <img class="wizard" src="Mojo wizzy.svg" alt="Mojo Wizard">
+
+      <!-- Order: blue chat, orange shuffle, purple megaphone, green timer, red people, orange music -->
+      <div class="icon icon-1" data-tooltip="Think Pair Share"><img src="icon 1.svg" alt="Think Pair Share"></div>
+      <div class="icon icon-2" data-tooltip="Shuffle"><img src="icon 2.svg" alt="Shuffle"></div>
+      <div class="icon icon-3" data-tooltip="Noise Meter"><img src="icon 3.svg" alt="Noise Meter"></div>
+      <div class="icon icon-4" data-tooltip="Timer"><img src="icon 4.svg" alt="Timer"></div>
+      <div class="icon icon-5" data-tooltip="Group Maker"><img src="icon 5.svg" alt="Group Maker"></div>
+      <div class="icon icon-6" data-tooltip="Music"><img src="Group.svg" alt="Music"></div>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll('.icon').forEach(icon => {
+      let isDragging = false;
+      let prevX, prevY, velX = 0, velY = 0;
+      let offsetX = 0, offsetY = 0;
+      let animFrame;
+
+      const onDown = (e) => {
+        e.preventDefault();
+        isDragging = true;
+        const pt = e.touches ? e.touches[0] : e;
+        prevX = pt.clientX;
+        prevY = pt.clientY;
+        velX = 0;
+        velY = 0;
+        offsetX = 0;
+        offsetY = 0;
+        const img = icon.querySelector('img');
+        img.style.transition = 'none';
+        img.style.transform = 'translate(0px, 0px)';
+      };
+
+      const onMove = (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const pt = e.touches ? e.touches[0] : e;
+        const dx = pt.clientX - prevX;
+        const dy = pt.clientY - prevY;
+        // Smooth velocity with momentum
+        velX = velX * 0.5 + dx * 0.5;
+        velY = velY * 0.5 + dy * 0.5;
+        offsetX += dx;
+        offsetY += dy;
+        prevX = pt.clientX;
+        prevY = pt.clientY;
+        icon.querySelector('img').style.transform =
+          `translate(${offsetX}px, ${offsetY}px) rotate(${offsetX * 0.15}deg)`;
+      };
+
+      const onUp = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        const img = icon.querySelector('img');
+
+        // Fling in the velocity direction
+        const speed = Math.sqrt(velX * velX + velY * velY);
+        const flingScale = Math.min(speed * 12, 250);
+        const angle = Math.atan2(velY, velX);
+        const flingX = offsetX + Math.cos(angle) * flingScale;
+        const flingY = offsetY + Math.sin(angle) * flingScale;
+
+        // Phase 1: fling outward
+        img.style.transition = 'transform 0.35s cubic-bezier(0.2, 0, 0.4, 1)';
+        img.style.transform =
+          `translate(${flingX}px, ${flingY}px) rotate(${flingX * 0.2}deg)`;
+
+        // Phase 2: boomerang back with smooth arc
+        setTimeout(() => {
+          img.style.transition = 'transform 1s cubic-bezier(0.25, 0.8, 0.25, 1)';
+          img.style.transform = 'translate(0px, 0px) rotate(0deg)';
+        }, 350);
+
+        // Clean up
+        setTimeout(() => {
+          img.style.transition = '';
+          img.style.transform = '';
+        }, 1400);
+      };
+
+      icon.addEventListener('mousedown', onDown);
+      icon.addEventListener('touchstart', onDown, { passive: false });
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('touchmove', onMove, { passive: false });
+      window.addEventListener('mouseup', onUp);
+      window.addEventListener('touchend', onUp);
+    });
+  </script>
+</body>
+</html>
